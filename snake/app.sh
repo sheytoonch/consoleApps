@@ -4,15 +4,23 @@
 source settings.sh
 source functions.sh
 
+is_game_finished="FALSE"
+
 echo -e "Running -- snake -- written in Bash."
 echo -e "Move with arrows or WSAD keys.\nEnjoy! :)"
-sleep 3
+sleep 0
+
 
 #game_map=$(create_map $map_width $map_height)
+# place apple
 
-move=$(get_user_move "W")
-echo $move
+while [ $is_game_finished != "TRUE" ]; do
+    # WSAD or keep going towards previous direction
+    direction=$(get_user_move $direction)
+    echo $direction
+done
 
-
-# input move arrows or WSAD
-# if no input, keep moving in the same direction
+# check if eats apple
+# check if can move
+# check if won't hit itself
+# check if wall
