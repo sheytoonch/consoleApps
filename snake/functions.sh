@@ -1,5 +1,6 @@
 source settings.sh
 
+
 get_user_move() {
     # Previous move is the argument
     direction=$1
@@ -13,7 +14,6 @@ get_user_move() {
             "d" | "D") direction="D" ;;
             *)  ;;
         esac
-
     else
         direction=$1
     fi
@@ -22,21 +22,21 @@ get_user_move() {
 }
 
 
-create_game_map() {
-    declare -a mapArray
+# Arguments are width and height
+initiate_game_board() {
+    local game_board=()
 
-    for ((y=0; y<$map_height; y++)); do
-        for((x=0; x<$map_width; x++)); do
-            arrayIndex=$((y * $map_width + x))
-            bottomEdge=$((y * $map_width))
+    for((row = 0; row < $2; row++)); do
+        for((column = 0; column < $1; column++)); do
+            index=$((row * $1 + column))
 
-            if [ y -eq 0 ] || [ y -eq $((y * $map_width)) ] || [ x -eq 0 ] || [ x -eq $((x * $map_height)) ]; then
-                mapArray[$arrayIndex]="X"
+            if [ $row -eq 0 ] || [ $row -eq $(( $2 - 1 )) ] || [ $column -eq 0 ] || [ $column -eq $(( $1 - 1 )) ]; then
+                game_board[index]=$map_border_sign
             else
-                mapArray[$arrayIndex]="O"
+                game_board[index]=$map_field_sign
             fi
         done
     done
 
-    echo "${mapArray[@]}"
+    echo "${game_board[@]}"
 }
