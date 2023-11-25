@@ -1,7 +1,7 @@
 game_tick=1
 
-map_width=10
-map_height=7
+map_width=3
+map_height=3
 map_border_sign="#"
 map_field_sigh=" "
 

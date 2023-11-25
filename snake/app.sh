@@ -11,8 +11,14 @@ echo -e "Move with arrows or WSAD keys.\nEnjoy! :)"
 sleep 0
 
 
-#game_map=$(create_map $map_width $map_height)
+#game_map=$(create_game_map $map_width $map_height)
 # place apple
+
+myMap=($(create_game_map))
+echo $myMap
+
+echo "end"
+exit 0
 
 while [ $is_game_finished != "TRUE" ]; do
     # WSAD or keep going towards previous direction
