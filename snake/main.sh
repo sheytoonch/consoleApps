@@ -10,31 +10,41 @@ echo -e "Running -- snake -- written in Bash."
 echo -e "Move with arrows or WSAD keys.\nEnjoy! :)"
 sleep 0
 
-
-#game_map=$(create_game_map $map_width $map_height)
-# place apple
+#################################################################
+### Generate empty map with borders
 
 initiated_game_board=$(initiate_game_board $map_width $map_height)
-IFS=" " read -ra game_board <<< "$initiated_game_board" # read from variable
+# Read from variable and split into array
+read -ra game_board <<< "$initiated_game_board"
+
+
+################################################################# - delete later
+### Temporary draw function
+
+rendered_board=$(render_board "${game_board[@]}")
+read -ra board_to_print <<< "$rendered_board"
 
 for((row=0; row<$map_height; row++)); do
     for((column=0; column<$map_width; column++)); do
         index=$((row * $map_width + column))
-        echo -n "${game_board[index]} "
+        echo -n "${board_to_print[index]} "
     done
     echo
 done
 
-echo "end"
-exit 0
 
 while [ $is_game_finished != "TRUE" ]; do
+    echo "BEGINNING OF WHILE"
     # WSAD or keep going towards previous direction
     direction=$(get_user_move $direction)
     echo $direction
 
+    echo "END OF WHILE"
+    is_game_finished="TRUE"
 done
 
+
+echo "END OF SNAKE"
 
 # check if eats apple
 # check if can move
